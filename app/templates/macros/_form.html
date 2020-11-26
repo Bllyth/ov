@@ -1,0 +1,52 @@
+{% macro render_form(field) %}
+    <div class="form-group">
+        {{ field(class="form-control", placeholder=field.label.text, **kwargs) | safe }}
+
+
+        {% for error in field.errors %}
+            <span class="text-danger">{{ error }}</span></br>
+        {% endfor %}
+    </div>
+
+{% endmacro %}
+
+{% macro render_date_field(field) %}
+    <div class="form-group mb-4">
+{#        {{ field.label }}#}
+        <div class="form-group">
+            {{ field(class="form-control datepicker", placeholder=field.label.text, **kwargs) | safe }}
+
+
+{#            {% for error in field.errors %}#}
+{#                <span class="text-danger">{{ error }}</span></br>#}
+{#            {% endfor %}#}
+        </div>
+    </div>
+
+{% endmacro %}
+
+{% macro render_apped(field) %}
+    {{ field.label }}
+
+    <div class="input-group">
+        <div class="input-group-append">
+        <span class="input-group-text input-g-text">
+            KSH
+        </span>
+        </div>
+        {{ field(class="form-control", **kwargs) | safe }}
+    </div>
+
+    {% for error in field.errors %}
+        <span class="text-danger">{{ error }}</span></br>
+    {% endfor %}
+
+
+{% endmacro %}
+
+{% macro render_submit(field) %}
+
+    {{ field(class="btn btn-info btn-submit") }}
+
+{% endmacro %}
+

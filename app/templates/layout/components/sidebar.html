@@ -1,0 +1,72 @@
+<div class="vertical-menu">
+
+    <div data-simplebar class="h-100">
+
+        <!--- Sidemenu -->
+        <div id="sidebar-menu">
+            <!-- Left Menu Start -->
+            <ul class="metismenu list-unstyled" id="side-menu">
+
+
+                <li>
+                    <a href="{{  url_for('main.index') }}" class=" waves-effect">
+                        <i class="ucrm-icon--dashboard"></i>
+                        <span>Dashboard</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="{{  url_for('main.clients') }}" class=" waves-effect">
+                        <i class="ucrm-icon--clients"></i>
+                        <span>Clients</span>
+                    </a>
+                </li>
+
+                <li>
+                    <a href="{{  url_for('main.invoices') }}" class=" waves-effect">
+                        <i class="ucrm-icon--invoices"></i>
+                        <span>Invoices</span>
+                    </a>
+                </li>
+
+                <li>
+                    <a href="{{  url_for('main.payments') }}" class=" waves-effect">
+                        <i class="ucrm-icon--payment icon-smaller"></i>
+                        <span>Payments</span>
+                    </a>
+                </li>
+
+                <li>
+                    <a href="{{  url_for('main.tickets') }}" class=" waves-effect">
+                        <i class="ucrm-icon--messages-question"></i>
+                        <span>Ticketing</span>
+                    </a>
+                </li>
+
+                <li>
+                    <a href="{{  url_for('main.reports') }}" class=" waves-effect">
+                        <i class="ucrm-icon--reports"></i>
+                        <span>Reports</span>
+                    </a>
+                </li>
+
+                <li>
+                    <a href="javascript: void(0);" class="has-arrow waves-effect">
+                        <i class="ucrm-icon--settings"></i>
+                        <span>Settings</span>
+                    </a>
+                    <ul class="sub-menu" aria-expanded="false">
+                        <li><a href="{{ url_for('main.users') }}">Users</a></li>
+                        <li><a href="{{ url_for('main.tariffs') }}">Service Plans</a></li>
+                        <li><a href="{{ url_for('main.departments') }}">Departments</a></li>
+                        <li><a href="{{ url_for('main.user_groups') }}">Security</a></li>
+                        <li><a href="{{ url_for('main.payment_methods') }}">Payment methods</a></li>
+                        <li><a href="{{ url_for('main.logs') }}">Logs</a></li>
+                        <li><a href="{{ url_for('main.downloads') }}">Downloads</a> </li>
+                    </ul>
+                </li>
+
+            </ul>
+        </div>
+        <!-- Sidebar -->
+    </div>
+</div>

@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html class="no-js">
+<head>
+  <title>{% block title %}{% endblock %}</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.min.css') }}" type="text/css">
+<style>
+    body, html {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    background: #f6f8f9;
+}
+    .form{
+        background: #fff;
+    }
+    .form .setup-form{
+        padding: 25px;
+    }
+
+    .form-group {
+    margin-bottom: 15px;
+}
+
+    label {
+    display: inline-block;
+    max-width: 100%;
+    margin-bottom: 5px;
+    font-weight: 500;
+}
+</style>
+  {% block head %}{% endblock %}
+</head>
+<body class="d-flex flex-column justify-content-center align-items-center signed-out">
+
+  <div>
+    <div class="header">
+      <div class="text-center m-b-15">
+{#        <a href="/"><img src="/static/images/redash_icon_small.png"></a>#}
+      </div>
+      {% if not hide_page_header %}
+        <h3 class="text-center mt-0 mb-5">{{ self.title() }}</h3>
+      {% endif %}
+    </div>
+    {% block content %}{% endblock %}
+  </div>
+
+{% block scripts %}{% endblock %}
+
+</body>
+</html>

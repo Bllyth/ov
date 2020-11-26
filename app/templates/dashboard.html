@@ -1,0 +1,183 @@
+{% extends 'layout/base.html' %}
+
+{% block content %}
+    <div class="page-content">
+        <div class="container-fluid">
+            <div class="col-md-11">
+
+            <div class="row">
+                <div class="col-6">
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="card-header__title">
+                                Overview
+                            </div>
+{#                            <a href="{{ url_for('main.test') }}">Get as PDF</a>#}
+                        </div>
+                        <div class="card-block">
+                            <div class="row">
+                                <div>
+                                    <a class="card-stats__item card-column__border pl-4 pr-5" href="{{ url_for('main.clients') }}">
+                                        <div class="card-stats__icon">
+                                            <span class="icon ucrm-icon--clients primary">
+
+                                            </span>
+                                        </div>
+                                        <div class="card-stats__text">
+
+                                            <div class="card-stats__text__value primary">
+                                                {{ clients_count }}
+                                            </div>
+                                            <div class="card-stats__text__label">Active clients</div>
+                                        </div>
+                                    </a>
+                                </div>
+
+                                <div>
+                                    <a class="card-stats__item pl-4" href="">
+                                        <div class="card-stats__icon">
+                                            <span class="icon ucrm-icon--invoice-overdue danger">
+
+                                            </span>
+                                        </div>
+                                        <div class="card-stats__text">
+                                            <div class="card-stats__text__value danger">
+                                                {{ overdue_invoices_count }}
+                                            </div>
+                                            <div class="card-stats__text__label">Overdue clients</div>
+                                        </div>
+                                    </a>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-6">
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="card-header__title">
+                                System status
+                            </div>
+                        </div>
+                        <div class="card-block">
+                            <ul id="system-status-checklist" class="status-checklist">
+                                <li class="success status-checklist__item--yes all-operational">
+
+                                            All systems operational.
+
+                                </li>
+
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-6">
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="card-header__title">
+                                Overdue invoices
+                            </div>
+                        </div>
+                        <div class="card-block">
+                            <div class="card-block__empty">
+                                <table class="table list-table dt-responsive nowrap">
+                            <thead>
+                            <tr>
+                                <th scope="col">INVOICE NUMBER</th>
+                                <th scope="col">CLIENT</th>
+                                <th class="text-right" scope="col">TOTAL / AMOUNT DUE</th>
+                                <th scope="col">DUE</th>
+                            </tr>
+                            </thead>
+
+
+                            <tbody>
+                            {% for invoice in overdue_invoices %}
+                                <tr>
+                                <tr >
+                                    <td>{{ invoice.invoice_no }}
+                                        {% if invoice.invoice_status == 1 %}
+                                            <span class=" ml-3 f-12 primary">Unpaid</span>
+                                        {% elif invoice.invoice_status == 2 %}
+                                            <span class=" ml-3 success">Partial</span>
+                                        {% endif %}
+                                    </td>
+                                    <td>{{ invoice.client() }}</td>
+                                    <td class="text-right">{{ invoice.total | shilling}} / {{ (invoice.total - invoice.amount_paid) | shilling }}</td>
+                                    <td> <span class="invoice--overdue" data-toggle="tooltip" data-placement="top" title="" data-original-title="{{ invoice.due_date | datef }}">overdue for {{ invoice.date_diff(today, invoice.due_date) }} days </span></td>
+
+                                </tr>
+
+                            {% endfor %}
+                            </tbody>
+                        </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-6">
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="card-header__title">
+                                Email Statistics
+                            </div>
+                        </div>
+                        <div class="card-block">
+                            <div class="card-block__empty">There are no emails sent.</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-6">
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="card-header__title">
+                                All clients
+                            </div>
+                        </div>
+                        <div class="card-block">
+                            <div class="card-block__empty">There are no clients..</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-6">
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="card-header__title">
+                                My clients
+                            </div>
+                        </div>
+                        <div class="card-block">
+                            <div class="card-block__empty">You have no clients.</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        </div> <!-- container-fluid -->
+    </div>
+    <!-- End Page-content -->
+
+
+    <footer class="footer">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-sm-6">
+                    <script>document.write(new Date().getFullYear())</script>
+                    © Optifast.
+                </div>
+                <div class="col-sm-6">
+                    <div class="text-sm-right d-none d-sm-block">
+                        Design & Develop by Calvin.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+{% endblock %}

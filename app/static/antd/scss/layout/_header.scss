@@ -1,0 +1,10 @@
+.header {
+  display: flex;
+  align-items: center;
+  height: $headerHeight;
+
+  @media (max-width: 1024px) {
+    height: $headerHeightSmaller;
+  }
+
+}

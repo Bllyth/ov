@@ -1,0 +1,21 @@
+<li>
+                    <a href="{{  url_for('main.index') }}" class=" waves-effect">
+                        <i class="bx bx-home-circle"></i>
+                        <span>Dashboard</span>
+                    </a>
+                </li>
+
+
+{% macro nav_link(endpoint, text) %}
+{% if request.endpoint.endswith(endpoint) %}
+    <li class="active"><a href="{{ url_for(endpoint) }}">{{text}}</a></li>
+{% else %}
+    <li>
+                    <a href="{{  url_for('main.index') }}" class=" waves-effect">
+                        <i class="bx bx-home-circle"></i>
+                        <span>Dashboard</span>
+                    </a>
+                </li>
+    <li><a href="{{ url_for(endpoint) }}">{{text}}</a></li>
+{% endif %}
+{% endmacro %}

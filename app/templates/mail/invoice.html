@@ -1,0 +1,22 @@
+{% extends 'mail/email.html' %}
+
+{% block header %}
+    <p style="text-align:center">
+        <img src="{{ url_for('static', filename='images/billing/new-invoice.png') | safe }}" width="35" alt="">
+    </p>
+
+            <h1 style="text-align:center">New invoice</h1>
+{% endblock %}
+
+{% block body %}
+ <p style="text-align:center">
+                You have  a new invoice for <b>{{ invoice.total | shilling }}</b>.
+                Please refer to it in this email's attachments.
+            </p>
+
+            <p style="text-align:center">
+                Your total outstanding balance is <b>{{ client.balance | shilling }}</b>.
+            </p>
+
+            <p>&nbsp;</p>
+{% endblock %}

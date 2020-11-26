@@ -1,0 +1,63 @@
+{% extends "layout/setup.html" %}
+
+
+
+
+{% block title %}Optifast Initial setup{% endblock %}
+
+
+{% macro render_field_errors(field) -%}
+  {% if field.errors %}
+    {% for e in field.errors %}
+      <p class="help-block">{{ e }}</p>
+    {% endfor %}
+  {% endif %}
+{%- endmacro %}
+
+{% macro render_field(field, help_block=None) -%}
+  <div class="form-group {% if field.errors %}has-error{% endif %}">
+    {{ field.label() }}
+    {{ field(class='form-control') }}
+    {% if help_block %}
+        <p class="help-block">{{ help_block }}</p>
+    {% endif %}
+    {{ render_field_errors(field) }}
+  </div>
+{%- endmacro %}
+
+{% block content %}
+    <div class="form">
+<div class="fixed-width-page">
+  <div class="bg-white tiled">
+
+  <div class="setup-form">
+  <h4 class="mt-0">Welcome to Optifast!</h4>
+    <div>Before you can use your instance, you need to do a quick setup.</div>
+
+    {% with messages = get_flashed_messages() %}
+      {% if messages %}
+        {% for message in messages %}
+          <div class="alert mt-3 alert-warning" role="alert">{{ message }}</div>
+        {% endfor %}
+      {% endif %}
+    {% endwith %}
+
+    <form role="form" method="post" name="create_account">
+      <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
+      <h4 class="mt-4">Admin User</h4>
+      {{ render_field(form.first_name) }}
+        {{ render_field(form.last_name) }}
+        {{ render_field(form.username) }}
+      {{ render_field(form.email) }}
+      {{ render_field(form.password) }}
+        {{ render_field(form.phone) }}
+
+      <button type="submit" class="btn btn-primary btn-block m-t-25">Setup</button>
+    </form>
+  </div>
+
+</div>
+
+  </div>
+</div>
+{% endblock %}

@@ -1,0 +1,129 @@
+{% extends 'layout/base.html' %}
+{% import 'macros/_form.html' as f %}
+
+
+
+{% block content %}
+
+
+    <div class="page-header page-header--has-background page-header--has-navigation">
+        <div class="page-header__top">
+            <div class="page-header__left">
+                <h1> Paid report</h1>
+            </div>
+        </div>
+
+
+    </div>
+    <div class="container-fluid mt-4">
+
+        <table class="billing-box billing-box-fixed">
+            <tbody>
+            <tr>
+                <td class="balance primary {% if  request.endpoint == "main.reports" %}selected{% endif %}">
+                    <a href="{{ url_for('main.reports') }}">
+                        <strong>KSH {{ total }}</strong><br>
+
+                        <span class="account-standings__label primary">Total</span>
+                    </a>
+                </td>
+
+                <td class="balance primary {% if  request.endpoint == "main.report_unpaid" %}selected{% endif %}">
+                    <a href="{{ url_for('main.report_unpaid') }}">
+                        <strong>KSH {{ total_unpaid }}</strong><br>
+
+                        <span class="account-standings__label primary">Unpaid Invoices</span>
+                    </a>
+                </td>
+
+                <td class="balance primary {% if  request.endpoint == "main.report_unpaid_overdue" %}selected{% endif %}">
+                    <a href="{{ url_for('main.report_unpaid_overdue') }}">
+
+                        {% if total_overdue %}
+                            <strong>KSH {{ total_overdue }}</strong><br>
+                        {% else %}
+                            <strong class="danger">KSH 0.00</strong><br>
+                        {% endif %}
+
+
+                        <span class="account-standings__label primary">Unpaid Overdue Invoices</span>
+                    </a>
+                </td>
+
+                <td class="balance primary {% if  request.endpoint == "main.report_paid" %}selected{% endif %}">
+                    <a href="{{ url_for('main.report_paid') }}">
+                        <strong>KSH {{ paid }}</strong><br>
+
+                        <span class="account-standings__label primary">Paid Invoices</span>
+                    </a>
+                </td>
+
+
+            </tr>
+            </tbody>
+        </table>
+
+        <div class="card mt-4">
+            <div class="card-body ">
+
+
+                <table id="datatable-buttons"
+                       class="table table-striped table-bordered dt-responsive nowrap"
+                       style="border-collapse: collapse; border-spacing: 0; width: 100%;">
+                    <thead>
+                    <tr>
+                        <th scope="col" style="width: 70px;">INVOICE NUMBER</th>
+                        <th scope="col">CLIENT</th>
+                        <th scope="col">TOTAL</th>
+                        <th scope="col">AMOUNT DUE</th>
+                        <th scope="col">CREATED DATE</th>
+                        <th scope="col">CREATED BY</th>
+                    </tr>
+                    </thead>
+
+
+                    <tbody>
+                    {% for invoice in invoices %}
+                        <tr>
+                            <td>{{ invoice.invoice_no }}
+                                {% if invoice.invoice_status == 1 %}
+                                    <span class=" ml-3 primary">Unpaid</span>
+                                {% elif invoice.invoice_status == 2 %}
+                                    <span class=" ml-3 success">Partial</span>
+                                {% else %}
+                                    <span class=" ml-3 quiet">Paid</span>
+                                {% endif %}
+                            </td>
+                            <td>{{ invoice.invoice_client.client_user.full_name }}</td>
+                            <td>{{ invoice.total }}</td>
+                            <td>{{ invoice.total }}</td>
+                            <td>{{ invoice.create_date }}</td>
+                            <td>{{ invoice.due_date }}</td>
+
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+
+    </div>
+
+    <style>
+        .table-row {
+            cursor: pointer;
+        }
+
+    </style>
+    <script>
+        $(document).ready(function ($) {
+            $(".table-row").click(function () {
+                window.document.location = $(this).data("href");
+            });
+        });
+
+    </script>
+
+
+{% endblock %}

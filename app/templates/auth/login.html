@@ -1,0 +1,104 @@
+<!doctype html>
+<html lang="en">
+
+    <head>
+
+        <meta charset="utf-8" />
+        <title>Login</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+{#        <link rel="shortcut icon" href="{{ url_for('static', filename='fonts/lato/lato.css') }}images/favicon.ico">#}
+
+        {{ toastr.include_toastr_css() }}
+        <script src="{{ url_for('static', filename='libs/jquery/jquery.min.js') }}"></script>
+        <!-- Bootstrap Css -->
+        <link href="{{ url_for('static', filename='css/bootstrap.min.css') }}" id="bootstrap-style" rel="stylesheet" type="text/css" />
+        <!-- Icons Css -->
+        <link href="{{ url_for('static', filename='css/icons.min.css') }}" rel="stylesheet" type="text/css" />
+        <!-- App Css-->
+        <link href="{{ url_for('static', filename='css/app.min.css') }}" id="app-style" rel="stylesheet" type="text/css" />
+
+        {{ toastr.message() }}
+
+    </head>
+
+    <body>
+
+        <div class="account-pages my-5 pt-sm-5">
+            <div class="container">
+                <div class="row justify-content-center">
+                    <div class="col-md-8 col-lg-6 col-xl-5">
+                        <div class="card overflow-hidden">
+{#                            <div class="bg-soft-primary">#}
+{#                                <div class="row">#}
+{#                                    <div class="col-7">#}
+{#                                        <div class="text-primary p-4">#}
+{#                                            <h5 class="text-primary">Welcome Back !</h5>#}
+{#                                            <p>Sign in to continue to continue.</p>#}
+{#                                        </div>#}
+{#                                    </div>#}
+{#                                    <div class="col-5 align-self-end">#}
+{#                                        <img src="{{ url_for('static', filename='fonts/lato/lato.css') }}images/profile-img.png" alt="" class="img-fluid">#}
+{#                                    </div>#}
+{#                                </div>#}
+{#                            </div>#}
+                            <div class="card-body pt-0">
+{#                                <div>#}
+{#                                    <a href="index.html">#}
+{#                                        <div class="avatar-md profile-user-wid mb-4">#}
+{#                                            <span class="avatar-title rounded-circle bg-light">#}
+{#                                                <img src="{{ url_for('static', filename='fonts/lato/lato.css') }}images/logo.svg" alt="" class="rounded-circle" height="34">#}
+{#                                            </span>#}
+{#                                        </div>#}
+{#                                    </a>#}
+{#                                </div>#}
+                                <div class="p-2">
+                                    <form class="form-horizontal" action="" method="post">
+                                        {{ form.hidden_tag() }}
+
+                                        <div class="form-group">
+                                            {{ form.username.label }}
+                                            {{ form.username(class="form-control") }}
+                                        </div>
+
+                                        <div class="form-group">
+                                            {{ form.password.label }}
+                                            {{ form.password(class="form-control") }}
+                                        </div>
+
+{#                                        <div class="custom-control custom-checkbox">#}
+{#                                            <input type="checkbox" class="custom-control-input" id="customControlInline">#}
+{#                                            <label class="custom-control-label" for="customControlInline">Remember me</label>#}
+{#                                        </div>#}
+
+                                        <div class="mt-3">
+
+                                            {{ form.submit(class="btn btn-primary btn-block waves-effect waves-light") }}
+                                        </div>
+
+{#                                        <div class="mt-4 text-center">#}
+{#                                            <a href="auth-recoverpw.html" class="text-muted"><i class="mdi mdi-lock mr-1"></i> Forgot your password?</a>#}
+{#                                        </div>#}
+                                    </form>
+                                </div>
+
+                            </div>
+                        </div>
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- JAVASCRIPT -->
+
+        <script src="{{ url_for('static', filename='libs/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
+        <script src="{{ url_for('static', filename='libs/metismenu/metisMenu.min.js') }}"></script>
+        <script src="{{ url_for('static', filename='libs/simplebar/simplebar.min.js') }}"></script>
+        <script src="{{ url_for('static', filename='libs/node-waves/waves.min.js') }}"></script>
+        {{ toastr.include_toastr_js() }}
+
+        <!-- App js -->
+        <script src="{{ url_for('static', filename='js/app.js') }}"></script>
+    </body>
+</html>

@@ -1,0 +1,334 @@
+<style>
+    .wrapper {
+        font-size: 13px;
+        line-height: 1.4;
+        color: #3c444d;
+        margin: 0 -20px;
+    }
+
+    h1 {
+        display: block;
+        margin: 0;
+        font-weight: bold;
+        font-size: 18px;
+    }
+
+    h2 {
+        display: block;
+        margin: 0 0 10px;
+        font-weight: bold;
+        font-size: 11px;
+        color: #777d84;
+        text-transform: uppercase;
+    }
+
+    h2.dark {
+        color: #3c444d;
+    }
+
+    table {
+        width: 100%;
+        margin: 0;
+        border-collapse: separate;
+        border-spacing: 0;
+        page-break-inside: auto;
+    }
+
+    table tr {
+        page-break-inside: avoid;
+        page-break-after: auto;
+    }
+
+    table td,
+    table th {
+        vertical-align: top;
+    }
+
+    .header {
+        margin-bottom: 48px;
+        padding: 0 20px;
+    }
+
+    .header__logo {
+        text-align: right;
+    }
+
+    .identification {
+        padding: 0 20px;
+    }
+
+    .identification__separator {
+        width: 15%;
+    }
+
+    .identification__more {
+        margin-top: 10px;
+        font-size: 11px;
+    }
+
+    .identification__more th {
+        font-weight: bold;
+        text-transform: uppercase;
+        padding-right: 10px;
+        text-align: left;
+    }
+
+    .identification__more td {
+        color: #596068;
+        text-align: right;
+    }
+
+
+    .identification__recipient {
+        float: right;
+    }
+
+    .items {
+        margin-top: 48px;
+        table-layout: fixed;
+    }
+
+    .items th,
+    .items td {
+        padding: 6px 20px;
+        border-bottom: 1px solid #eaecef;
+        text-align: right;
+    }
+
+    .items th {
+        font-weight: bold;
+        font-size: 11px;
+        color: #777d84;
+        text-transform: uppercase;
+    }
+
+    .item--has-children td,
+    .item--sub td {
+        border-bottom-width: 0;
+    }
+
+    .item--last td {
+        border-bottom-width: 1px;
+    }
+
+    .items .item__label {
+        text-align: left;
+        width: 50%;
+    }
+
+    .items .item__label > span {
+        word-wrap: break-word;
+    }
+
+
+    .totals {
+        white-space: nowrap;
+        margin-top: 9px;
+        page-break-inside: avoid;
+    }
+
+    .totals--paid {
+        margin-top: 24px;
+    }
+
+    .totals th,
+    .totals td {
+        padding: 3px 20px;
+        text-align: right;
+        vertical-align: middle;
+    }
+
+    .totals th {
+        width: 100%;
+        font-weight: bold;
+        font-size: 11px;
+        color: #777d84;
+        text-transform: uppercase;
+    }
+
+    .totals__large th,
+    .totals__large td {
+        font-size: 15px;
+        font-weight: bold;
+        color: #3c444d;
+    }
+
+    .totals .totals__separator {
+        padding: 12px 0 0;
+    }
+
+    .totals a {
+        font-weight: bold;
+        font-size: 12px;
+        color: #00a0df;
+        text-transform: uppercase;
+        text-decoration: none;
+    }
+
+
+    .tax-stamp__tax h2 {
+        padding-left: 20px;
+    }
+
+    .tax-recapitulation th,
+    .tax-recapitulation td {
+        padding: 6px;
+        text-align: right;
+    }
+
+    .tax-recapitulation td {
+        white-space: nowrap;
+    }
+
+    .tax-recapitulation th {
+        font-weight: bold;
+        font-size: 11px;
+        color: #777d84;
+        text-transform: uppercase;
+        border-bottom: 1px solid #eaecef;
+    }
+
+    .tax-recapitulation .tax-recapitulation__name {
+        padding-left: 20px;
+        text-align: left;
+    }
+
+    .tax-recapitulation .tax-recapitulation__total {
+        padding-right: 20px;
+    }
+
+    .tax-recapitulation__name strong {
+        text-transform: uppercase;
+        font-size: 12px;
+    }
+
+    .footer {
+        margin-top: 48px;
+        padding: 0 20px;
+        page-break-inside: avoid;
+    }
+
+    .footer__text {
+        line-height: 1.25;
+        padding-top: 20px;
+        border-top: 1px solid #eaecef;
+        font-size: 11px;
+    }
+
+    .footer__text + .footer__text {
+        border-top: 0;
+    }
+
+
+</style>
+
+<div class="wrapper">
+    <table class="header">
+        <tbody>
+        <tr>
+            <td class="header__heading">
+                <h1>Invoice #{{ invoice.invoice_no }}</h1>
+                Created date: {{ invoice.create_date | fdate }}
+            </td>
+            <td class="header__logo">
+                {#                    {% if organization.logo %}#}
+                {#                         <img src="{{ organization.logo }}" alt="">#}
+                {#                    {% endif %}#}
+            </td>
+        </tr>
+        </tbody>
+    </table>
+
+    <table class="identification">
+        <tbody>
+        <tr>
+            <td class="identification__sender">
+                <h2>From</h2>
+                <div>
+                    <strong>Optifast Communications</strong>
+                </div>
+                <table class="identification__more">
+                    <tbody>
+                    <tr>
+                        <th>MPESA PAYBILL: 187158</th>
+                    </tr>
+                    <tr>
+                        <th>ACCOUNT: {{ invoice.invoice_no }}</th>
+                    </tr>
+                    <tr>
+                        <th> Beneficiary: Optifast Ventures Limited</th>
+                    </tr>
+
+                    </tbody>
+                </table>
+
+            </td>
+            <td class="identification__separator"></td>
+            <td class="identification__recipient">
+                <h2>To</h2>
+                <div>
+                    <strong>{{ client.client_user.full_name }}</strong> <br>
+                    {{ client.client_user.email }}<br>
+                    {{ client.client_user.phone }}
+                </div>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+
+    <table class="items">
+        <thead>
+        <tr>
+            <th class="item__label">Item</th>
+            <th class="item__price">Price</th>
+            <th class="item__quantity">Quantity</th>
+            <th class="item__total last-child">Total</th>
+        </tr>
+        </thead>
+
+        <tbody>
+        <tr>
+            <td class="item__label">{{ service.service_tariff.name + '  ' + (service.active_from | fdate) + ' to ' + service.next_invoicing_date | fdate }}</td>
+            <td class="item__price">{{ service.service_tariff.price | shilling }}</td>
+            <td class="item__quantity">1</td>
+            <td class="item__total last-child">{{ service.service_tariff.price | shilling }}</td>
+        </tr>
+        </tbody>
+
+    </table>
+
+    <table class="totals">
+        <tr>
+            <th>Subtotal</th>
+            <td>{{ invoice.total | shilling }}</td>
+        </tr>
+        <tr>
+            <th>Total</th>
+            <td>{{ invoice.total | shilling }}</td>
+        </tr>
+    </table>
+
+    <table class="totals totals--paid">
+        <tr>
+            <th>Amount paid</th>
+            {% if  invoice.amount_paid == None %}
+                <td>0.00</td>
+            {% else %}
+                <td>{{ invoice.amount_paid | shilling }}</td>
+            {% endif %}
+        </tr>
+        <tr class="totals__large">
+            <th>Amount due</th>
+            <td>{{ invoice.balance | shilling }}</td>
+        </tr>
+
+        <tr>
+            <td colspan="2">Due {{ invoice.due_date | fdate }}</td>
+        </tr>
+        <tr>
+            <td colspan="2" class="totals__separator"></td>
+        </tr>
+    </table>
+
+
+</div>

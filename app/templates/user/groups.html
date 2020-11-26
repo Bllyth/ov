@@ -1,0 +1,72 @@
+{% extends 'layout/base.html' %}
+
+
+{% block content %}
+
+   <div class="page-header">
+        <div class="page-header__top">
+            <div>
+                <h1><a href="{{  url_for('main.user_groups') }}">Clients</a></h1>
+                <a class="btn btn-info" href="{{ url_for('main.new_user_group') }}">+ Permission group</a>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="page-content">
+        <div class="container-fluid">
+
+            <div class="row">
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-body">
+
+
+                            <table class="table table-striped table-bordered dt-responsive nowrap"
+                                   style="border-collapse: collapse; border-spacing: 0; width: 100%;">
+                                <thead>
+                                <tr>
+                                    <th scope="col">NAME</th>
+
+                                </tr>
+                                </thead>
+
+
+                                <tbody>
+                                {% for group in groups %}
+                                    <tr>
+                                        <tr class="table-row" data-href="{{ url_for('main.user_group',group_id=group.id) }}">
+                                        <td>{{ group.name }}</td>
+
+                                        <td></td>
+                                    </tr>
+                                {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div> <!-- end col -->
+            </div> <!-- end row -->
+
+        </div> <!-- container-fluid -->
+    </div>
+    <!-- End Page-content -->
+
+
+    <style>
+        .table-row {
+            cursor: pointer;
+        }
+
+    </style>
+    <script>
+        $(document).ready(function ($) {
+            $(".table-row").click(function () {
+                window.document.location = $(this).data("href");
+            });
+        });
+
+    </script>
+
+
+{% endblock %}

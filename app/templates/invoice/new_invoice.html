@@ -1,0 +1,132 @@
+{% extends 'layout/base.html' %}
+
+{% block content %}
+
+    <div class="page-header mb-4 page-header--has-background">
+        <div class="page-header__top">
+            <div>
+                <h1>invoices</h1>
+                <button type="button" class="btn btn-info waves-effect waves-light" data-toggle="modal"
+                        data-target=".invoice">+ Invoice
+                </button>
+
+            </div>
+        </div>
+    </div>
+
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-8">
+                <form action="" method="post">
+                    {{ form.hidden_tag() }}
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group row mb-4">
+                                        <label class="col-sm-3 col-form-label required">{{ form.invoice_number.label }}</label>
+                                        <div class="col-sm-9">
+                                            {{ form.invoice_number(class="form-control") }}
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-6">
+                                    <div class="form-group row mb-4">
+                                        <label class="col-sm-3 col-form-label required">{{ form.created_date.label }}</label>
+                                        <div class="col-sm-9">
+                                            {{ form.created_date(class="form-control datepicker") }}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="card-body">
+                            <table class="invoice-table table table-striped table-bordered dt-responsive nowrap no-footer">
+                                <thead>
+                                <tr>
+
+                                    <th class="invoice-item--label">Label</th>
+                                    <th class="invoice-item--price">Price</th>
+                                    <th class="invoice-item--quantity">Quantity</th>
+
+                                    <th class="invoice-item--total">Total</th>
+                                    <th class="invoice-item--actions"></th>
+                                </tr>
+
+
+                                </thead>
+
+                                <tbody>
+                                <tr class="text-dark">
+                                    <td>{{ service.service_tariff.name + '  ' + moment(service.active_from, local='en-gb').format('DD MMM YYYY') + ' to ' + moment(service.next_invoicing_date, local='en-gb').format('DD MMM YYYY') }}</td>
+                                    <td>{{ service.service_tariff.price }}</td>
+                                    <td>1</td>
+                                    <td class="total">KSH {{ service.service_tariff.price }}</td>
+                                </tr>
+
+
+                                </tbody>
+
+
+                            </table>
+                            <div class="invoice-form__total">
+                                <div class="invoice-form__note">
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            {{ form.notes(class="form-control", placeholder="Invoice notes") }}
+                                        </div>
+                                    </div>
+                                </div>
+                            <div class="invoice-form__total-box">
+                                <table>
+                                    <tbody class="invoice-form__total-box__subtotal">
+                                    <tr>
+                                        <th>Subtotal</th>
+                                        <td>
+                                            KSH&nbsp;{{ service.service_tariff.price }}
+                                        </td>
+                                    </tr>
+                                    </tbody>
+                                    <tbody class="invoice-form__total-box__taxes">
+                                    <tr class="empty">
+                                        <td></td>
+                                    </tr>
+                                    </tbody>
+
+                                    <tbody class="invoice-form__total-box__total">
+                                    <tr>
+                                        <th>Amount due</th>
+                                        <td>
+                                            KSH&nbsp;{{ service.service_tariff.price }}
+                                        </td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+
+                            </div>
+
+                        </div>
+                    </div>
+                    {{ form.submit(class="btn btn-info") }}
+                    {{ form.submit_and_send(class="btn btn-info") }}
+                </form>
+            </div>
+
+
+        </div>
+    </div>
+
+
+    </div>
+
+
+
+{% endblock %}
+
+
+
+

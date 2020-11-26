@@ -1,0 +1,112 @@
+{% extends 'layout/base.html' %}
+
+
+{% block content %}
+
+    <div class="page-header">
+        <div class="page-header__top">
+            <div>
+                <h1>Service plans</h1>
+                <a class="btn btn-info" href="{{ url_for('main.new_tariff') }}">+ Service plan</a>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="page-content">
+        <div class="container-fluid">
+
+            <div class="row">
+                <div class="col-md-7">
+                    <div class="card">
+                        <div class="card-body">
+                            <table class="table table-striped table-bordered dt-responsive nowrap">
+                                <thead>
+                                <tr>
+                                    <th scope="col" style="width: 70px;">#</th>
+                                    <th scope="col">NAME</th>
+                                    {#                                        <th scope="col">ACTIVE SERVICES</th>#}
+                                    <th scope="col">PRICE</th>
+                                    <th scope="col"></th>
+                                </tr>
+                                </thead>
+
+
+                                <tbody>
+                                {% for tariff in tariffs %}
+                                    <tr>
+                                        <td>{{ tariff.id }}</td>
+                                        <td>{{ tariff.name }}</td>
+                                        <td>{{ tariff.price }}</td>
+                                        <td class="float-right actions">
+                                             <a class="mr-2" href="{{ url_for('main.edit_tariff', tariff_id = tariff.id) }}">
+                                                <span class="icon ucrm-icon--edit"></span>
+                                            </a>
+
+                                            <a class="danger" href="#" data-toggle="modal" data-target=".delete-{{ tariff.id }}">
+                                                <span class="icon ucrm-icon--trash"></span>
+                                            </a>
+
+                                        </td>
+                                    </tr>
+
+                                    <div class="modal fade delete-{{ tariff.id }}" tabindex="-1" role="dialog"
+                                         aria-labelledby="mySmallModalLabel" aria-hidden="true">
+                                        <div class="modal-dialog modal-lg modal-width">
+                                            <div class="modal-content modal-padding">
+                                                <div class="modal-header">
+                                                    <h3 class="modal-title mt-0">Delete service plan</h3>
+                                                    <button type="button" class="close" data-dismiss="modal"
+                                                            aria-label="Close">
+                                                        <span aria-hidden="true">&times;</span>
+                                                    </button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <h5 class="mb-0">
+                                                        Do you really want to delete this service plan?
+                                                    </h5>
+                                                    <div class="modal-footer">
+
+                                                        <button type="button" class="btn btn-secondary"
+                                                                data-dismiss="modal">Close
+                                                        </button>
+                                                        <form action="{{ url_for('main.delete_tariff', tariff_id=tariff.id) }}"
+                                                              method="post">
+                                                                {{ form.hidden_tag() }}
+
+                                                            <input class="btn btn-danger" type="submit" value="Delete">
+                                                        </form>
+                                                    </div>
+                                                </div>
+                                            </div><!-- /.modal-content -->
+                                        </div><!-- /.modal-dialog -->
+                                    </div>
+                                {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div> <!-- end col -->
+            </div> <!-- end row -->
+
+        </div> <!-- container-fluid -->
+    </div>
+    <!-- End Page-content -->
+
+    <style>
+        .table-row {
+            cursor: pointer;
+        }
+
+    </style>
+    <script>
+        $(document).ready(function ($) {
+            $(".table-row").click(function () {
+                window.document.location = $(this).data("href");
+            });
+        });
+
+    </script>
+
+
+{% endblock %}

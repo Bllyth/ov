@@ -1,0 +1,7 @@
+Dear {{ client.client_user.first_name }},
+
+Please find attached the archive of your posts that you requested.
+
+Sincerely,
+
+The Optifast Team

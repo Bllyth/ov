@@ -1,0 +1,28 @@
+<div class="receipt">
+    <h1>Payment receipt</h1>
+
+    <h2>Payment information</h2>
+    <table>
+        <tr>
+            <th>Payment date</th>
+            <td>{{ payment.date | datef }}</td>
+        </tr>
+        <tr>
+            <th>Amount paid</th>
+            <td>KES {{ payment.amount }}</td>
+        </tr>
+                    <tr>
+                <th>Method</th>
+                <td>{{ payment.pament_method.name }}</td>
+            </tr>
+{#                            <tr>#}
+{#                <th>Check number</th>#}
+{#                <td>CHCK5988334</td>#}
+{#            </tr>#}
+            </table>
+
+
+
+            <p>
+            Overpayment of <strong>KES 8,367.02</strong> converted to credit.        </p>
+    </div>
